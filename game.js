@@ -16,6 +16,8 @@ const hands = [...document.querySelectorAll('.select img')];
 const playBtn = document.querySelector('button.start');
 const summary = [...document.querySelectorAll('.panel-left span')];
 const results = [...document.querySelectorAll('.panel-right span')];
+
+// Incrementators
 let nOfGames = 0;
 let nOfWins = 0;
 let nOfLoss = 0;
@@ -65,6 +67,11 @@ function announceResult(player, pc, result) {
     }
 }
 
+function endGame() {
+    hands.forEach(hand => hand.style.boxShadow = '');
+    game.playerHand = null;
+}
+
 
 function executeGame() {
     // Function controlling game mechanics
@@ -75,6 +82,7 @@ function executeGame() {
     game.pcHand = pcChoice()
     const gameResult = checkResult(game.playerHand, game.pcHand);
     announceResult(game.playerHand, game.pcHand, gameResult);
+    endGame();
 }
 
 hands.forEach(hand => hand.addEventListener('click', handSelection));
